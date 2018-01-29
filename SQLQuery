@@ -1,0 +1,17 @@
+select Customers.Name from 
+(select CustomerId
+from Customers
+where CustomerId IN 
+(
+select distinct CustomerId 
+from Purchases 
+where ProductName = N'Milk'
+and CustomerId NOT IN
+	(
+	select CustomerId 
+	from Purchases
+	where ProductName = N'SourScream' AND Purchases.PurchaseDatetime >= DATEADD(MONTH, -1, GETDATE())
+	)
+)) as d
+inner join Customers
+on d.CustomerId = Customers.CustomerId
