@@ -73,7 +73,7 @@
         {
             if (a + b <= c || a + c <= b || b + c <= a)
             {
-                throw new ArgumentException("Triangle with indicated sides can not exists");
+                return false;
             }
 
             return true;
@@ -88,6 +88,10 @@
                 this.ASide = a;
                 this.BSide = b;
                 this.CSide = c;
+            }
+            else
+            {
+                throw new ArgumentException("Triangle with indicated sides can not exists");
             }
         }
 
